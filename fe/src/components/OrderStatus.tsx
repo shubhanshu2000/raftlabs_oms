@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import type { Order } from "../types";
 import { OrderStatus } from "../types";
 import { getOrderStatus } from "../services/api";
-import "./OrderStatus.css";
 
 interface OrderStatusProps {
   orderId: string;
@@ -112,82 +111,98 @@ export const OrderStatusComponent = ({
   const isDelivered = order.status === OrderStatus.DELIVERED;
 
   return (
-    <div className="order-status">
-      <div className="order-header">
-        <h2>Order #{order.id}</h2>
-        <p className="order-date">
+    <div className="bg-white rounded-brand p-8 shadow-brand-lg">
+      <div className="mb-8 pb-4 border-b-2 border-gray-200">
+        <h2 className="text-3xl font-bold text-gray-800 mb-2">Order #{order.id}</h2>
+        <p className="text-gray-500 text-sm">
           Placed on {new Date(order.createdAt).toLocaleString()}
         </p>
       </div>
 
-      <div className="status-tracker">
-        <h3>Order Status</h3>
-        <div className="status-steps">
+      <div className="mb-12 py-4">
+        <h3 className="text-2xl font-semibold text-gray-800 mb-10 text-center">Order Status</h3>
+        <div className="flex justify-between relative mx-auto max-w-[90%]">
           {statusSteps.map((status, index) => (
             <div
               key={status}
-              className={`status-step ${index <= currentStepIndex ? "completed" : ""} ${index === currentStepIndex && !isDelivered ? "current" : ""}`}
+              className={`flex-1 flex flex-col items-center relative z-10 ${index <= currentStepIndex ? "text-brand-success font-semibold" : "text-gray-500"} ${index === currentStepIndex && !isDelivered ? "text-brand-primary font-bold" : ""}`}
             >
-              <div className="step-indicator">
-                <div className="step-circle">
+              <div className="flex flex-col items-center relative w-full">
+                <div className={`w-14 h-14 rounded-full flex items-center justify-center font-bold text-xl transition-all duration-500 z-20 relative ${
+                  index < currentStepIndex || (index === currentStepIndex && isDelivered)
+                    ? "bg-brand-success border-4 border-brand-success text-white scale-110 shadow-[0_4px_6px_-1px_rgba(16,185,129,0.3)]"
+                    : index === currentStepIndex
+                      ? "bg-white border-4 border-brand-primary text-brand-primary scale-125 shadow-[0_0_0_6px_rgba(234,88,12,0.15)]"
+                      : "bg-white border-4 border-gray-200 text-gray-400"
+                }`}>
                   {index < currentStepIndex || (index === currentStepIndex && isDelivered) ? (
-                    <svg viewBox="0 0 24 24" className="check-icon">
-                      <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                    <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                     </svg>
                   ) : (
                     index + 1
                   )}
                 </div>
                 {index < statusSteps.length - 1 && (
-                  <div className="step-line"></div>
+                  <div className={`absolute top-7 left-1/2 w-full h-1 z-0 -translate-y-1/2 transition-colors duration-500 ${
+                    index < currentStepIndex 
+                      ? "bg-brand-success" 
+                      : index === currentStepIndex && !isDelivered
+                        ? "bg-gradient-to-r from-brand-success to-gray-200"
+                        : "bg-gray-200"
+                  }`}></div>
                 )}
               </div>
-              <div className="step-label">{status}</div>
+              <div className={`mt-6 text-sm text-center max-w-[140px] leading-tight transition-all duration-300 ${
+                index <= currentStepIndex ? (index === currentStepIndex && !isDelivered ? "translate-y-0.5" : "") : ""
+              }`}>
+                {status}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="order-details">
-        <h3>Order Items</h3>
-        <div className="order-items">
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Order Items</h3>
+        <div className="bg-gray-50 rounded-lg p-4">
           {order.items.map((item, index) => (
-            <div key={index} className="order-item">
-              <div className="order-item-info">
-                <span className="order-item-name">{item.name}</span>
-                <span className="order-item-quantity">x{item.quantity}</span>
+            <div key={index} className="flex justify-between items-center py-3 border-b border-gray-200 last:border-b-0">
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-gray-800">{item.name}</span>
+                <span className="text-gray-500 text-sm">x{item.quantity}</span>
               </div>
-              <span className="order-item-price">
+              <span className="font-semibold text-brand-primary">
                 ${(item.price * item.quantity).toFixed(2)}
               </span>
             </div>
           ))}
         </div>
-        <div className="order-total">
-          <strong>Total:</strong>
-          <strong>${order.totalAmount.toFixed(2)}</strong>
+        <div className="flex justify-between items-center pt-4 mt-4 border-t-2 border-gray-200 text-xl">
+          <strong className="text-gray-800 font-bold">Total:</strong>
+          <strong className="text-brand-primary text-2xl font-bold">${order.totalAmount.toFixed(2)}</strong>
         </div>
       </div>
 
-      <div className="delivery-details">
-        <h3>Delivery Details</h3>
-        <p>
-          <strong>Name:</strong> {order.deliveryDetails.name}
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Delivery Details</h3>
+        <p className="mb-2 text-gray-800 leading-relaxed">
+          <strong className="mr-2">Name:</strong> {order.deliveryDetails.name}
         </p>
-        <p>
-          <strong>Address:</strong> {order.deliveryDetails.address}
+        <p className="mb-2 text-gray-800 leading-relaxed">
+          <strong className="mr-2">Address:</strong> {order.deliveryDetails.address}
         </p>
-        <p>
-          <strong>Phone:</strong> {order.deliveryDetails.phone}
+        <p className="mb-2 text-gray-800 leading-relaxed">
+          <strong className="mr-2">Phone:</strong> {order.deliveryDetails.phone}
         </p>
       </div>
 
       {isDelivered && (
-        <div className="order-complete">
-          <p className="success-message">
+        <div className="text-center p-8 bg-gradient-to-b from-green-100 to-green-200 rounded-brand mt-8">
+          <p className="text-xl font-semibold text-green-900 mb-6">
             🎉 Your order has been delivered! Enjoy your meal!
           </p>
-          <button className="btn btn-primary" onClick={onNewOrder}>
+          <button className="btn btn-primary mt-4" onClick={onNewOrder}>
             Place New Order
           </button>
         </div>

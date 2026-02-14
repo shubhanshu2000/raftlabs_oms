@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { DeliveryDetails } from "../types";
-import "./CheckoutForm.css";
 
 interface CheckoutFormProps {
   onSubmit: (details: DeliveryDetails) => void;
@@ -83,10 +82,10 @@ export const CheckoutForm = ({
   };
 
   return (
-    <div className="checkout-form">
-      <h2>Delivery Details</h2>
+    <div className="bg-white rounded-brand p-8 shadow-brand-lg">
+      <h2 className="text-3xl font-bold text-gray-800 mb-8 pb-4 border-b-2 border-gray-200">Delivery Details</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group mb-2">
           <label htmlFor="name">Full Name *</label>
           <input
             type="text"
@@ -96,10 +95,10 @@ export const CheckoutForm = ({
             className={errors.name ? "error" : ""}
             disabled={isSubmitting}
           />
-          <span className="error-message">{errors.name || ''}</span>
+          <span className="error-message min-h-[20px] mt-1 mb-2">{errors.name || ''}</span>
         </div>
 
-        <div className="form-group">
+        <div className="form-group mb-2">
           <label htmlFor="address">Delivery Address *</label>
           <textarea
             id="address"
@@ -109,10 +108,10 @@ export const CheckoutForm = ({
             className={errors.address ? "error" : ""}
             disabled={isSubmitting}
           />
-          <span className="error-message">{errors.address || ''}</span>
+          <span className="error-message min-h-[20px] mt-1 mb-2">{errors.address || ''}</span>
         </div>
 
-        <div className="form-group">
+        <div className="form-group mb-2">
           <label htmlFor="phone">Phone Number *</label>
           <input
             type="tel"
@@ -123,7 +122,7 @@ export const CheckoutForm = ({
             className={errors.phone ? "error" : ""}
             disabled={isSubmitting}
           />
-          <span className="error-message">{errors.phone || ''}</span>
+          <span className="error-message min-h-[20px] mt-1 mb-2">{errors.phone || ''}</span>
         </div>
 
         <div className="form-actions">

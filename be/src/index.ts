@@ -17,13 +17,13 @@ app.use(cors());
 app.use(express.json());
 
 // Request logging middleware
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
   logger.http(`${req.method} ${req.url}`);
   next();
 });
 
 // Routes
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.send("Food Delivery API");
 });
 
@@ -31,7 +31,7 @@ app.use("/api/v1/menu", menuRoutes);
 app.use("/api/v1", orderRoutes);
 
 // 404 handler (must be before error handler)
-app.use((req: Request, res: Response) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({
     success: false,
     error: "Route not found",

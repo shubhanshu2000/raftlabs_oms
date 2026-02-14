@@ -11,13 +11,13 @@ export const MenuItem = ({ item, onAddToCart }: MenuItemProps) => {
   };
 
   return (
-    <div className="menu-item card">
-      <img src={item.image} alt={item.name} className="menu-item-image" />
-      <div className="menu-item-content">
-        <h3 className="menu-item-name">{item.name}</h3>
-        <p className="menu-item-description">{item.description}</p>
-        <div className="menu-item-footer">
-          <span className="menu-item-price">${item.price.toFixed(2)}</span>
+    <div className="card p-4 flex flex-col animate-fade-in">
+      <img src={item.image} alt={item.name} className="w-full h-48 object-cover rounded-brand mb-4" />
+      <div className="flex-1 flex flex-col">
+        <h3 className="text-xl font-bold text-gray-800 mb-2">{item.name}</h3>
+        <p className="text-gray-500 text-sm mb-4 flex-1">{item.description}</p>
+        <div className="flex justify-between items-center">
+          <span className="text-2xl font-bold text-brand-primary">${item.price.toFixed(2)}</span>
           <button
             className="btn btn-primary"
             onClick={handleAddToCart}

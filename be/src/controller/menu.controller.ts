@@ -25,7 +25,7 @@ export const getMenu = (
 };
 
 export const getCategories = (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction,
 ) => {

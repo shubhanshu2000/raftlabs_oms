@@ -12,6 +12,22 @@
   --color-primary-800: #991b1b;
   --color-primary-900: #7f1d1d;
 
+  --color-brand-primary: #ea580c;
+  --color-brand-primary-dark: #c2410c;
+  --color-brand-primary-light: #fed7aa;
+  --color-brand-secondary: #dc2626;
+  --color-brand-bg: #fff7ed;
+  --color-brand-bg-dark: #ffedd5;
+  --color-brand-success: #10b981;
+  --color-brand-error: #ef4444;
+
+  --shadow-brand-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-brand-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-brand-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-brand-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  --radius-brand: 0.75rem;
+
   --animate-fade-in: fadeIn 0.3s ease-in;
   --animate-slide-up: slideUp 0.3s ease-out;
 
@@ -25,219 +41,107 @@
   }
 }
 
-:root {
-  --color-primary: #ea580c;
-  --color-primary-dark: #c2410c;
-  --color-primary-light: #fed7aa;
-  --color-secondary: #dc2626;
-  --color-bg: #fff7ed;
-  --color-bg-dark: #ffedd5;
-  --color-text: #1f2937;
-  --color-text-light: #6b7280;
-  --color-border: #e5e7eb;
-  --color-white: #ffffff;
-  --color-success: #10b981;
-  --color-error: #ef4444;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --radius: 0.75rem;
-  --radius-full: 9999px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(to bottom right, var(--color-bg), var(--color-bg-dark));
-  min-height: 100vh;
-  color: var(--color-text);
-  line-height: 1.6;
-}
-
-/* Buttons */
-.btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius);
-  font-weight: 500;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-block;
-  text-align: center;
-}
-
-.btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.3);
-}
-
-.btn-primary {
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-  color: var(--color-white);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: linear-gradient(to right, var(--color-primary-dark), #b91c1c);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-1px);
-}
-
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn-secondary {
-  background-color: #f3f4f6;
-  color: var(--color-text);
-}
-
-.btn-secondary:hover {
-  background-color: #e5e7eb;
-}
-
-.btn-remove {
-  background-color: transparent;
-  color: var(--color-error);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-  border: 1px solid var(--color-error);
-  border-radius: 0.375rem;
-}
-
-.btn-remove:hover {
-  background-color: var(--color-error);
-  color: var(--color-white);
-}
-
-.btn-checkout {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.125rem;
-}
-
-/* Card */
-.card {
-  background-color: var(--color-white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-  transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-xl);
-}
-
-/* Loading and Error States */
-.loading, .error-state {
-  text-align: center;
-  padding: 3rem 1rem;
-}
-
-.loading {
-  color: var(--color-text-light);
-  font-size: 1.25rem;
-}
-
-.error-state p {
-  color: var(--color-error);
-  margin-bottom: 1rem;
-  font-size: 1.125rem;
-}
-
-/* Form Elements */
-input, textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-family: inherit;
-  transition: border-color 0.2s ease;
-}
-
-input[type="text"],
-input[type="tel"],
-input[type="email"] {
-  height: 48px;
-  line-height: 1.5;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
-}
-
-input.error, textarea.error {
-  border-color: var(--color-error);
-}
-
-.error-message {
-  color: var(--color-error);
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  display: block;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-.form-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.form-actions .btn {
-  flex: 1;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
   }
-  to {
-    opacity: 1;
+
+  body {
+    @apply font-sans antialiased text-gray-800 leading-relaxed min-h-screen;
+    background: linear-gradient(to bottom right, var(--color-brand-bg), var(--color-brand-bg-dark));
+  }
+
+  input, textarea {
+    @apply w-full p-3 border border-gray-300 rounded-lg text-base transition-colors duration-200;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"] {
+    @apply h-12;
+  }
+
+  input:focus, textarea:focus {
+    @apply outline-none border-brand-primary ring-2 ring-brand-primary/10;
+  }
+
+  input.error, textarea.error {
+    @apply border-brand-error;
   }
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-brand font-medium text-base border-none cursor-pointer transition-all duration-200 inline-block text-center focus:outline-none focus:ring-3 focus:ring-brand-primary/30;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  .btn-primary {
+    @apply text-white shadow-brand-md;
+    background: linear-gradient(to right, var(--color-brand-primary), var(--color-brand-secondary));
   }
-}
 
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-in;
-}
+  .btn-primary:hover:not(:disabled) {
+    @apply -translate-y-px shadow-brand-lg;
+    background: linear-gradient(to right, var(--color-brand-primary-dark), #b91c1c);
+  }
 
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out;
+  .btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-800 hover:bg-gray-200;
+  }
+
+  .btn-remove {
+    @apply px-2 py-1 text-sm border border-brand-error text-brand-error rounded hover:bg-brand-error hover:text-white bg-transparent;
+  }
+
+  .btn-checkout {
+    @apply w-full p-4 text-lg;
+  }
+
+  .card {
+    @apply bg-white rounded-brand shadow-brand-lg transition-shadow duration-300 hover:shadow-brand-xl;
+  }
+
+  .loading, .error-state {
+    @apply text-center py-12 px-4;
+  }
+
+  .loading {
+    @apply text-gray-500 text-xl;
+  }
+
+  .error-state p {
+    @apply text-brand-error mb-4 text-lg;
+  }
+
+  .error-message {
+    @apply text-brand-error text-sm mt-1 block;
+  }
+
+  .form-group {
+    @apply mb-6;
+  }
+
+  .form-group label {
+    @apply block mb-2 font-medium text-gray-800;
+  }
+
+  .form-actions {
+    @apply flex gap-4 mt-8;
+  }
+
+  .form-actions .btn {
+    @apply flex-1;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
 }

@@ -1,6 +1,6 @@
-import { createRoute, useNavigate } from "@tanstack/react-router";
+import { createRoute } from "@tanstack/react-router";
 import { Route as rootRoute } from "./__root";
-import { OrderStatusComponent } from "../components/OrderStatus";
+import { OrderStatusPage } from "../pages/OrderStatus";
 
 export const Route = createRoute({
   getParentRoute: () => rootRoute,
@@ -9,16 +9,7 @@ export const Route = createRoute({
 });
 
 function OrderStatusRoute() {
-  const navigate = useNavigate();
   const { orderId } = Route.useParams();
 
-  const handleNewOrder = () => {
-    navigate({ to: "/" });
-  };
-
-  return (
-    <div className="order-status-view">
-      <OrderStatusComponent orderId={orderId} onNewOrder={handleNewOrder} />
-    </div>
-  );
+  return <OrderStatusPage orderId={orderId} />;
 }

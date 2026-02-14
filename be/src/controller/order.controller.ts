@@ -81,7 +81,7 @@ export const updateOrderStatus = async (
 };
 
 export const getAllOrders = async (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction,
 ) => {
