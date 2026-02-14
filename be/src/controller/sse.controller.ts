@@ -5,12 +5,13 @@ import { Order } from "../types/order.types";
 
 // SSE endpoint for order status updates
 export const streamOrderStatus = async (req: Request, res: Response) => {
-  const orderId = req.params.id as string;
+  const orderId = (req as any).params.id as string;
 
   // Verify order exists
   const order = orderService.getOrderById(orderId);
+
   if (!order) {
-    res.status(404).json({
+    (res as any).status(404).json({
       success: false,
       error: "Order not found",
     });
@@ -18,24 +19,24 @@ export const streamOrderStatus = async (req: Request, res: Response) => {
   }
 
   // Set SSE headers
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
-  res.setHeader("X-Accel-Buffering", "no"); // Disable buffering in nginx
+  (res as any).setHeader("Content-Type", "text/event-stream");
+  (res as any).setHeader("Cache-Control", "no-cache");
+  (res as any).setHeader("Connection", "keep-alive");
+  (res as any).setHeader("X-Accel-Buffering", "no"); // Disable buffering for Vercel
 
   // Send initial order state
-  res.write(`data: ${JSON.stringify(order)}\n\n`);
+  (res as any).write(`data: ${JSON.stringify(order)}\n\n`);
 
   // Listen for order updates
   const onOrderUpdate = (updatedOrder: Order) => {
-    res.write(`data: ${JSON.stringify(updatedOrder)}\n\n`);
+    (res as any).write(`data: ${JSON.stringify(updatedOrder)}\n\n`);
   };
 
   orderEvents.on(`order:${orderId}`, onOrderUpdate);
 
   // Handle client disconnect
-  req.on("close", () => {
+  (req as any).on("close", () => {
     orderEvents.off(`order:${orderId}`, onOrderUpdate);
-    res.end();
+    (res as any).end();
   });
 };

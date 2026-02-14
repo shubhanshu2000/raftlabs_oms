@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "outDir": "./dist",
+    "types": [
+      "node"
+    ],
     "paths": {
       "*": [
         "node_modules/*"
@@ -16,6 +18,7 @@
     }
   },
   "include": [
+    "api/**/*",
     "src/**/*"
   ],
   "exclude": [

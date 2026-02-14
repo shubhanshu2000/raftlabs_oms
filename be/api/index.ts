@@ -2,13 +2,13 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
-import menuRoutes from "./routes/menu.route";
-import orderRoutes from "./routes/order.route";
-import logger from "./utils/logger";
+import menuRoutes from "../src/routes/menu.route";
+import orderRoutes from "../src/routes/order.route";
+import logger from "../src/utils/logger";
 
 dotenv.config();
 
-const app: Application = express() as any;
+const app: Application = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
@@ -40,10 +40,12 @@ app.use((_req: Request, res: Response) => {
   });
 });
 
-if (process.env.NODE_ENV !== "test") {
+// Export app for Vercel
+export default app;
+
+// Local development listener
+if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test") {
   app.listen(port, () => {
     logger.info(`[server]: Server is running at http://localhost:${port}`);
   });
 }
-
-export default app;

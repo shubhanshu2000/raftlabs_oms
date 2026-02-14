@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import supertest from "supertest";
-import app from "../../index";
+import app from "../../../api/index";
 
 import { MenuItem } from "../../types/menu.types";
 
 describe("Menu API Integration", () => {
-  let request: supertest.Agent;
+  let request: any;
 
   beforeAll(() => {
     request = supertest(app);
