@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as orderService from "../service/order.service";
 import { orderEvents } from "../service/order.events";
+import { Order } from "../types/order.types";
 
 // SSE endpoint for order status updates
 export const streamOrderStatus = async (req: Request, res: Response) => {
@@ -26,7 +27,7 @@ export const streamOrderStatus = async (req: Request, res: Response) => {
   res.write(`data: ${JSON.stringify(order)}\n\n`);
 
   // Listen for order updates
-  const onOrderUpdate = (updatedOrder: any) => {
+  const onOrderUpdate = (updatedOrder: Order) => {
     res.write(`data: ${JSON.stringify(updatedOrder)}\n\n`);
   };
 
