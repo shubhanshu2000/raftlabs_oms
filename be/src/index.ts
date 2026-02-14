@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from "express";
+import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -8,7 +8,7 @@ import logger from "./utils/logger";
 
 dotenv.config();
 
-const app: Express = express();
+const app: Application = express() as any;
 const port = process.env.PORT || 3000;
 
 // Middleware

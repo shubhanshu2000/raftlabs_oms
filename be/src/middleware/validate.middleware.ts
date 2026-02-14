@@ -10,7 +10,7 @@ export const validate =
         query: req.query,
         params: req.params,
       });
-      return next();
+      return (next as any)();
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
