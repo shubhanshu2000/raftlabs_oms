@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -17,18 +17,20 @@ app.use(cors());
 app.use(express.json());
 
 // Request logging middleware
-app.use((req, _res, next) => {
+app.use((req: Request, _res: Response, next: NextFunction) => {
   logger.http(`${req.method} ${req.url}`);
   next();
 });
 
 // Routes
+const API_V1 = "/api/v1";
+
 app.get("/", (_req: Request, res: Response) => {
   res.send("Food Delivery API");
 });
 
-app.use("/api/v1/menu", menuRoutes);
-app.use("/api/v1", orderRoutes);
+app.use(`${API_V1}/menu`, menuRoutes);
+app.use(`${API_V1}/orders`, orderRoutes);
 
 // 404 handler (must be before error handler)
 app.use((_req: Request, res: Response) => {

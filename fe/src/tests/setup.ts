@@ -11,7 +11,7 @@ afterEach(() => {
 Object.defineProperty(window, "EventSource", {
   writable: true,
   value: class EventSourceMock {
-    constructor(url: string) {}
+    constructor(_url: string) {}
     close() {}
   },
 });

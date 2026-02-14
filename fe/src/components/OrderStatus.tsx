@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Order } from "../types";
 import { OrderStatus } from "../types";
-import { getOrderStatus } from "../services/api";
+import { getOrderStatus, API_BASE_URL } from "../services/api";
 
 interface OrderStatusProps {
   orderId: string;
@@ -15,7 +15,6 @@ const statusSteps = [
   OrderStatus.DELIVERED,
 ];
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
 
 export const OrderStatusComponent = ({
   orderId,

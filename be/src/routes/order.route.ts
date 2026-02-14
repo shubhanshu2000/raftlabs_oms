@@ -6,14 +6,14 @@ import { createOrderSchema, updateOrderStatusSchema } from "../schemas/order.sch
 
 const router = Router();
 
-router.post("/orders", validate(createOrderSchema), orderController.createOrder);
-router.get("/orders/:id", orderController.getOrder);
-router.get("/orders/:id/stream", sseController.streamOrderStatus);
+router.post("/", validate(createOrderSchema), orderController.createOrder);
+router.get("/:id", orderController.getOrder);
+router.get("/:id/stream", sseController.streamOrderStatus);
 router.patch(
-  "/orders/:id/status",
+  "/:id/status",
   validate(updateOrderStatusSchema),
   orderController.updateOrderStatus,
 );
-router.get("/orders", orderController.getAllOrders);
+router.get("/", orderController.getAllOrders);
 
 export default router;
