@@ -43,9 +43,7 @@ app.use((_req: Request, res: Response) => {
 // Export app for Vercel
 export default app;
 
-// Local development listener
-if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test") {
-  app.listen(port, () => {
-    logger.info(`[server]: Server is running at http://localhost:${port}`);
-  });
-}
+app.listen(port, () => {
+  logger.info(`[server]: Server is running at http://localhost:${port}`);
+});
+
